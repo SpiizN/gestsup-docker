@@ -6,7 +6,7 @@ Unofficial dockerized version of [GestSup](https://gestsup.fr/), IT ticketing pl
 
 To install, you simply have to:
 ```bash
-git clone https://github.com/0xSpiizN/gestsup-docker.git
+git clone https://github.com/SpiizN/gestsup-docker.git
 cd gestsup-docker/
 docker compose up -d
 ```
