@@ -12,9 +12,6 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 COPY php.ini /etc/php/${PHP_VERSION}/apache2/php.ini
 RUN mkdir -p /var/www/html
 
-#--------------------------------------------------
-# Download and extract GestSup
-#--------------------------------------------------
 RUN set -eu; \
     ZIP="gestsup_${GESTSUP_VERSION}.zip"; \
     echo "Downloading GestSup version ${GESTSUP_VERSION}..."; \
@@ -24,9 +21,6 @@ RUN set -eu; \
     echo "Cleaning up default files..."; \
     rm -f "/tmp/${ZIP}" /var/www/html/index.html
 
-#--------------------------------------------------
-# Setting ownership and permissions
-#--------------------------------------------------
 RUN set -eu; \
     chown -R www-data:www-data /var/www/html; \
     find /var/www/html -type d -exec chmod 750 {} +; \
@@ -35,9 +29,6 @@ RUN set -eu; \
     chown -R www-data:www-data /var/lib/php/sessions; \
     chmod 660 /var/www/html/connect.php
 
-#--------------------------------------------------
-# Configuring Apache
-#--------------------------------------------------
 RUN set -eu; \
     SEC_CONF="/etc/apache2/conf-enabled/security.conf"; \
     if grep -qE '^ServerTokens\s+' "${SEC_CONF}"; then \
@@ -51,7 +42,7 @@ RUN set -eu; \
         echo 'ServerSignature Off' >> "${SEC_CONF}"; \
     fi
 
-COPY entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT [ "docker-entrypoint.sh" ]
+ENTRYPOINT [ "entrypoint.sh" ]
