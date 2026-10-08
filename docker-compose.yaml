@@ -3,11 +3,7 @@ services:
   # GestSup
   #--------------------------------------------------
   gestsup-app:
-    build:
-      context: app
-      args:
-        PHP_VERSION: "8.2"
-        GESTSUP_VERSION: "3.2.60"
+    image: ghcr.io/spiizn/gestsup-docker:latest
     restart: always
     container_name: gestsup-app
     ports:
