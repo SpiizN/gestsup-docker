@@ -7,7 +7,7 @@ services:
       context: app
       args:
         PHP_VERSION: "8.2"
-        GESTSUP_VERSION: "3.2.55"
+        GESTSUP_VERSION: "3.2.60"
     restart: always
     container_name: gestsup-app
     ports:
